@@ -14,14 +14,19 @@ namespace SingleView
 
 		public ListDemoController (IntPtr handle) : base (handle)
 		{
-           
-		}
+            myMap = new MapView();
+        }
 
         public override void LoadView()
         {
-            myMap.MyLocationEnabled = true;
-            var myCamera = CameraPosition.FromCamera(myMap.MyLocation.Coordinate, zoom:6);
+            
+            base.LoadView();
+           
+            var myCamera = CameraPosition.FromCamera(latitude: 7.2935273,
+                longitude: 80.6387523,
+                zoom: 13);
             myMap = MapView.FromCamera(RectangleF.Empty, myCamera);
+            
             View = myMap;
         }
 
@@ -34,7 +39,12 @@ namespace SingleView
 
         public override void ViewDidLoad()
         {
-            base.ViewDidLoad(); 
+            base.ViewDidLoad();
+
+            myMap.Settings.MyLocationButton = true;
+            myMap.MyLocationEnabled = true;
+         
+
             
         }
     }

@@ -110,7 +110,7 @@ namespace SingleView
             //}
 
             //perform the segue transition after all previous work finished
-            NavigationController.PushViewController(_mapsDemoController, true);
+            
         }
 
         private void UpdateVewPicker()
@@ -240,7 +240,7 @@ namespace SingleView
             }
             //this._connectionChanged -= this.Current_ConnectivityChanged;
 
-          
+
 
             //this._connectionChanged += this.Current_ConnectivityChanged;
 
@@ -253,6 +253,8 @@ namespace SingleView
             //        item.ToString();
             //    }
             //}
+
+            NavigationController.PushViewController(_mapsDemoController, true);
         }
 
 
