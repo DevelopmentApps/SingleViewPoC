@@ -1,10 +1,13 @@
 
 using CoreGraphics;
 using Foundation;
+using Plugin.Connectivity.Abstractions;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
+
+using System.Threading;
 using System.Threading.Tasks;
 using UIKit;
 
@@ -12,10 +15,17 @@ namespace SingleView
 {
 	partial class UiDemoController : UIViewController
 	{
+        ListDemoController _mapsDemoController;
+
         LoadingOverlay _loadingDemo;
 
-        UIActivityIndicatorView spinner;
-               
+        //UIActivityIndicatorView spinner;
+
+        //private CancellationTokenSource cancellationToken;
+
+        //private ConnectivityChangedEventHandler _connectionChanged;
+
+        //private int _eventInvoationList;   
 
         private IList<object> values;
 
@@ -23,8 +33,9 @@ namespace SingleView
 
 		public UiDemoController (IntPtr handle) : base (handle)
 		{
+            //this allows to register the controller so we can perform a segue withouth a "classic" segue
+            _mapsDemoController = Storyboard.InstantiateViewController("ListDemoController") as ListDemoController;
 
-        
         }
 
         
@@ -32,37 +43,42 @@ namespace SingleView
         public override void ViewDidLoad()
         {
 
-        
+            //Observable.FromEventPattern<ConnectivityChangedEventHandler, ConnectivityChangedEventArgs>(handler => this._connectionChanged += handler, handler => this._connectionChanged -= handler).Take(1).Subscribe();
 
-            Plugin.Connectivity.CrossConnectivity.Current.ConnectivityChanged += Current_ConnectivityChanged;
 
             base.ViewDidLoad();
 
-            values = new List<object>();
-                      
+
+            /////this method will not be used, is buggy and reentrant
+           // Plugin.Connectivity.CrossConnectivity.Current.ConnectivityChanged += Current_ConnectivityChanged;
+
+           // this._connectionChanged  +=  this.Current_ConnectivityChanged;
+           // _connectionChanged += Current_ConnectivityChanged;
+           //_eventInvoationList = _connectionChanged.GetInvocationList().Length;
 
             btnNewPage.TouchUpInside += BtnNewPage_TouchUpInside;
            
             lblTexto.Enabled = false;           
             this.Title = MessageToShow;
 
-            foreach (var item in Plugin.Connectivity.CrossConnectivity.Current.ConnectionTypes)
-            {
-                values.Add(item.ToString());
-            }
+            //foreach (var item in Plugin.Connectivity.CrossConnectivity.Current.ConnectionTypes)
+            //{
+            //    values.Add(item.ToString());
+            //}
 
-            PickerModelDemo pickmodel = new PickerModelDemo(values);
-            pcrView.Model = pickmodel;
-            pcrView.ShowSelectionIndicator = true;
+            UpdateVewPicker();
            
-
+          
         }
 
        
+
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
+           
             this.DismissViewController(true, null);
+            
 
 
         }
@@ -77,36 +93,114 @@ namespace SingleView
 
             Task.Factory.StartNew(() => { InvokeOnMainThread(() => ConnectionReview()); }).ContinueWith(t => { _loadingDemo.Hide(); }, TaskScheduler.FromCurrentSynchronizationContext());
 
-
+            //_eventInvoationList = _connectionChanged.GetInvocationList().Length;
 
             //  InvokeOnMainThread(() => showIndicator()); 
 
             //ConnectionReview();
 
             //InvokeOnMainThread(() => showIndicator());
+
+            //if (_connectionChanged != null)
+            //{
+            //    foreach (var item in _connectionChanged.GetInvocationList())
+            //    {
+            //        item.ToString();
+            //    }
+            //}
+
+            //perform the segue transition after all previous work finished
+            NavigationController.PushViewController(_mapsDemoController, true);
+        }
+
+        private void UpdateVewPicker()
+        {
+            if (values == null)
+            {
+                values = new List<object>();
+            }
+            else
+            {
+                values.Clear();
+            }
+          
+            values.Add(Plugin.Connectivity.CrossConnectivity.Current.ConnectionTypes.FirstOrDefault().ToString());
             
 
+            PickerModelDemo pickmodel = new PickerModelDemo(values);
+            pcrView.Model = pickmodel;
+            pcrView.ShowSelectionIndicator = true;
         }
 
         /// <summary>
-        /// this event must be handled only in view that are going to perform internet operations otherwise is not needed.
+        /// this event must be handled only in view that are going to perform internet operations otherwise is not needed. By the way, this method is buggy and reentrant we are not going to use it.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Current_ConnectivityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
-        {
+        //private void Current_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        //{
+        //    //CancellationTokenSource newCTS;
 
-            var bounds = UIScreen.MainScreen.Bounds;
-            _loadingDemo = new LoadingOverlay(bounds);
-            View.Add(_loadingDemo);
-            View.BringSubviewToFront(_loadingDemo);
+        //    //if (cancellationToken != null)
+        //    //{
+        //    //    cancellationToken.Cancel();
+        //    //}
 
-            Task.Factory.StartNew(() => { InvokeOnMainThread(() => ConnectionReview()); }).ContinueWith(t => { _loadingDemo.Hide(); }, TaskScheduler.FromCurrentSynchronizationContext());
+        //    //    newCTS = new CancellationTokenSource();
+        //    //    cancellationToken = newCTS;
+        //    //try
+        //    //{
 
-            //  InvokeOnMainThread(()=> showIndicator());
-            // ConnectionReview();
-            //InvokeOnMainThread(() =>  hideIndicator());
-        }
+
+        //        var bounds = UIScreen.MainScreen.Bounds;
+        //        _loadingDemo = new LoadingOverlay(bounds);
+        //        View.Add(_loadingDemo);
+        //        View.BringSubviewToFront(_loadingDemo);
+
+        //        Task.Factory.StartNew(() => { InvokeOnMainThread(() => ConnectionReview()); }).ContinueWith(t => { _loadingDemo.Hide(); }, TaskScheduler.FromCurrentSynchronizationContext());
+
+        //    //_eventInvoationList = _connectionChanged.GetInvocationList().Length;
+
+        //    //if (_connectionChanged != null)
+        //    //{
+        //    //    foreach (var item in _connectionChanged.GetInvocationList())
+        //    //    {
+        //    //        item.ToString();
+        //    //    }
+        //    //}
+
+        //    //}
+        //    //catch (OperationCanceledException)
+        //    //{
+        //    //    Console.WriteLine("Operation Cancelled");
+        //    //}
+        //    //catch (Exception)
+        //    //{
+
+        //    //    Console.WriteLine("Something worse happened");
+        //    //}
+        //    //finally
+        //    //{
+
+
+        //    //}
+
+
+        //    //if (cancellationToken == newCTS)
+        //    //    cancellationToken = null;
+
+
+
+
+
+
+
+        //    // UpdateVewPicker();
+
+        //    //  InvokeOnMainThread(()=> showIndicator());
+        //    // ConnectionReview();
+        //    //InvokeOnMainThread(() =>  hideIndicator());
+        //}
 
         private  void ConnectionReview()
         {
@@ -132,41 +226,61 @@ namespace SingleView
             {
 
                 lblMessageToUser.Text = "seems that you are connected via wifi";
+               
             }
             else if (currentConnectionType.FirstOrDefault().ToString() == Plugin.Connectivity.Abstractions.ConnectionType.Cellular.ToString() && currentNetworkReachability.ToString() == Plugin.Connectivity.NetworkStatus.ReachableViaCarrierDataNetwork.ToString())
             {
                 lblMessageToUser.Text = "seems that you are connected via cellular";
+                
             }
             else
             {
                 lblMessageToUser.Text = "seems that you have no connection";
+               
             }
+            //this._connectionChanged -= this.Current_ConnectivityChanged;
+
+          
+
+            //this._connectionChanged += this.Current_ConnectivityChanged;
+
+            //_eventInvoationList = _connectionChanged.GetInvocationList().Length;
+
+            //if (_connectionChanged != null)
+            //{
+            //    foreach (var item in _connectionChanged.GetInvocationList())
+            //    {
+            //        item.ToString();
+            //    }
+            //}
         }
 
-        private void showIndicator()
-        {
-            if (spinner == null)
-            {
+
+        /////This method didn't work
+        //private void showIndicator()
+        //{
+        //    if (spinner == null)
+        //    {
                 
-                spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);  
-                spinner.HidesWhenStopped = true;
-                spinner.Color = UIColor.Gray;
+        //        spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);  
+        //        spinner.HidesWhenStopped = true;
+        //        spinner.Color = UIColor.Gray;
                 
-            }
+        //    }
                       
-            View.AddSubview(spinner);
-            View.BringSubviewToFront(spinner);
-            spinner.StartAnimating();
-        }
+        //    View.AddSubview(spinner);
+        //    View.BringSubviewToFront(spinner);
+        //    spinner.StartAnimating();
+        //}
 
-        private void hideIndicator()
-        {
-            if (spinner == null)
-                return;
-            if (!spinner.IsAnimating)
-                return;
-            spinner.StopAnimating();
-        }
+        //private void hideIndicator()
+        //{
+        //    if (spinner == null)
+        //        return;
+        //    if (!spinner.IsAnimating)
+        //        return;
+        //    spinner.StopAnimating();
+        //}
 
         ////This method is not reliable, we can't know for sure when a site is available or not, we only will check if we can perform the operation on internet, if something wrong happens the catch the Exception and move on;
         //private async Task<bool> IsInternetConnectionAvailable()
@@ -277,9 +391,11 @@ namespace SingleView
                 labelWidth,
                 labelHeight
                 ));
+            
             loadingLabel.BackgroundColor = UIColor.Clear;
             loadingLabel.TextColor = UIColor.White;
-            loadingLabel.Text = "Loading Data...";
+            loadingLabel.Text = NSBundle.MainBundle.LocalizedString("Loading","This message is for loading stuff");
+            
             loadingLabel.TextAlignment = UITextAlignment.Center;
             loadingLabel.AutoresizingMask = UIViewAutoresizing.All;
             AddSubview(loadingLabel);

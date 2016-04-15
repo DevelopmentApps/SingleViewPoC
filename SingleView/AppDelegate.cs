@@ -1,6 +1,8 @@
 ﻿using Foundation;
 using UIKit;
 
+using Google.Maps;
+
 namespace SingleView
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -10,6 +12,9 @@ namespace SingleView
     public class AppDelegate : UIApplicationDelegate
     {
         // class-level declarations
+
+
+        const string MapsApiKey = "AIzaSyC_X1sOr-oTyoQpavjm_4BlEbGMiWn-oQY";    
 
         public override UIWindow Window
         {
@@ -21,6 +26,8 @@ namespace SingleView
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
+
+            MapServices.ProvideAPIKey(MapsApiKey);
 
             return true;
         }
