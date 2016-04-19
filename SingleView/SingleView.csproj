@@ -117,6 +117,10 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Resources\Base.lproj\MapAddressController.cs" />
+    <Compile Include="Resources\Base.lproj\MapAddressController.designer.cs">
+      <DependentUpon>MapAddressController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Base.lproj\ListDemoController.cs" />
     <Compile Include="Resources\Base.lproj\ListDemoController.designer.cs">
       <DependentUpon>ListDemoController.cs</DependentUpon>

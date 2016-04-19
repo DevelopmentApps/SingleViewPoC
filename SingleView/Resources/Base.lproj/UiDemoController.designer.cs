@@ -14,11 +14,13 @@ namespace SingleView
 	[Register ("UiDemoController")]
 	partial class UiDemoController
 	{
-		
-
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton btnNewPage { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton btnTransitionToAddress { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -34,10 +36,13 @@ namespace SingleView
 
 		void ReleaseDesignerOutlets ()
 		{
-			
 			if (btnNewPage != null) {
 				btnNewPage.Dispose ();
 				btnNewPage = null;
+			}
+			if (btnTransitionToAddress != null) {
+				btnTransitionToAddress.Dispose ();
+				btnTransitionToAddress = null;
 			}
 			if (lblMessageToUser != null) {
 				lblMessageToUser.Dispose ();

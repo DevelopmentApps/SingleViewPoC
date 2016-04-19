@@ -17,6 +17,8 @@ namespace SingleView
 	{
         ListDemoController _mapsDemoController;
 
+        MapAddressController _mapAddressController;
+
         LoadingOverlay _loadingDemo;
 
         //UIActivityIndicatorView spinner;
@@ -35,6 +37,12 @@ namespace SingleView
 		{
             //this allows to register the controller so we can perform a segue withouth a "classic" segue
             _mapsDemoController = Storyboard.InstantiateViewController("ListDemoController") as ListDemoController;
+
+            _mapAddressController = Storyboard.InstantiateViewController("MapAddressController") as MapAddressController;
+
+          
+
+
 
         }
 
@@ -57,6 +65,8 @@ namespace SingleView
            //_eventInvoationList = _connectionChanged.GetInvocationList().Length;
 
             btnNewPage.TouchUpInside += BtnNewPage_TouchUpInside;
+            btnTransitionToAddress.TouchUpInside += BtnTransitionToAddress_TouchUpInside;
+
            
             lblTexto.Enabled = false;           
             this.Title = MessageToShow;
@@ -71,7 +81,7 @@ namespace SingleView
           
         }
 
-       
+      
 
         public override void ViewDidDisappear(bool animated)
         {
@@ -111,6 +121,11 @@ namespace SingleView
 
             //perform the segue transition after all previous work finished
             
+        }
+
+        private void BtnTransitionToAddress_TouchUpInside(object sender, EventArgs e)
+        {
+            NavigationController.PushViewController(_mapAddressController, true);
         }
 
         private void UpdateVewPicker()
