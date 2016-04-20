@@ -19,7 +19,7 @@ namespace SingleView
 
         MapAddressController _mapAddressController;
 
-        LoadingOverlay _loadingDemo;
+       
 
         //UIActivityIndicatorView spinner;
 

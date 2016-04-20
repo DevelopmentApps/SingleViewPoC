@@ -49,7 +49,7 @@ namespace SingleView
 
             loadingLabel.BackgroundColor = UIColor.Clear;
             loadingLabel.TextColor = UIColor.White;
-            loadingLabel.Text = NSBundle.MainBundle.LocalizedString("Loading", "This message is for loading stuff");
+            loadingLabel.Text = NSBundle.MainBundle.LocalizedString("Wait", "This message is for loading stuff");
 
             loadingLabel.TextAlignment = UITextAlignment.Center;
             loadingLabel.AutoresizingMask = UIViewAutoresizing.All;

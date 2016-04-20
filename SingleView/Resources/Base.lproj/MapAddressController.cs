@@ -18,6 +18,7 @@ namespace SingleView
 
         Address _googleMapsAddress;
 
+        
         LoadingOverlay _loadingOverlay;             
 
         public MapAddressController(IntPtr handle) : base(handle)

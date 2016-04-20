@@ -17,7 +17,10 @@ namespace SingleView
 
         CLLocationManager _location;
 
-        LoadingOverlay _loadingDemo;
+        /// <summary>
+        /// /loadingOverlay is not an option 
+        /// </summary>
+        //LoadingOverlay _loadingDemo;
 
         public ListDemoController (IntPtr handle) : base (handle)
 		{
@@ -35,20 +38,21 @@ namespace SingleView
             _location.DesiredAccuracy = CLLocation.AccurracyBestForNavigation;
             _location.DistanceFilter = CLLocationDistance.FilterNone;
 
-            var bounds = UIScreen.MainScreen.Bounds;
-            _loadingDemo = new LoadingOverlay(bounds);
-            View.Add(_loadingDemo);
-            View.BringSubviewToFront(_loadingDemo);
+            //var bounds = UIScreen.MainScreen.Bounds;
+            //_loadingDemo = new LoadingOverlay(bounds);
+            //View.Add(_loadingDemo);
+            //View.BringSubviewToFront(_loadingDemo);
 
-            Task.Factory.StartNew(() => { InvokeOnMainThread(() => ShowLocationOnMap()); }).ContinueWith(t =>
-            {
-                InvokeOnMainThread(() => _loadingDemo.Hide());
-            });
+            //Task.Factory.StartNew(() => { InvokeOnMainThread(() => ShowLocationOnMap()); }).ContinueWith(t =>
+            //{
+            //    InvokeOnMainThread(() => _loadingDemo.Hide());
+            //});
+            ShowLocationOnMap();
 
-            if (_loadingDemo != null)
-            {
-                _loadingDemo.Dispose();
-            }
+            //if (_loadingDemo != null)
+            //{
+            //    _loadingDemo.Dispose();
+            //}
 
            
 
