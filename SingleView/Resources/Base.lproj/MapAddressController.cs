@@ -18,9 +18,7 @@ namespace SingleView
 
         Address _googleMapsAddress;
 
-        LoadingOverlay _loadingOverlay;
-
-        UIView []_views;
+        LoadingOverlay _loadingOverlay;             
 
         public MapAddressController(IntPtr handle) : base(handle)
         {
@@ -54,7 +52,7 @@ namespace SingleView
                 View.BringSubviewToFront(_loadingOverlay);
 
 
-                _views = View.Subviews;
+              
                 Task.Factory.StartNew(() => { InvokeOnMainThread(() => GetCurrentUserLocation()); }).ContinueWith(t => 
                 {
                    InvokeOnMainThread( () => _loadingOverlay.Hide());
@@ -73,13 +71,7 @@ namespace SingleView
             }
 
            lblNumCalls.Text = System.Convert.ToString(_numOfCalls += 1);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-            
-        }
+        }       
 
         private void GetCurrentUserLocation()
         {

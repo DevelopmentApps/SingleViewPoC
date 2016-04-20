@@ -117,6 +117,7 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="LoadingOverlay.cs" />
     <Compile Include="Resources\Base.lproj\MapAddressController.cs" />
     <Compile Include="Resources\Base.lproj\MapAddressController.designer.cs">
       <DependentUpon>MapAddressController.cs</DependentUpon>

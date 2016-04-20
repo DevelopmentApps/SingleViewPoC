@@ -95,15 +95,7 @@ namespace SingleView
 
         private void BtnNewPage_TouchUpInside(object sender, EventArgs e)
         {
-
-            var bounds = UIScreen.MainScreen.Bounds;
-            _loadingDemo = new LoadingOverlay(bounds);
-            View.Add(_loadingDemo);
-            View.BringSubviewToFront(_loadingDemo);
-
-            Task.Factory.StartNew(() => { InvokeOnMainThread(() => ConnectionReview()); }).ContinueWith(t => { _loadingDemo.Hide(); }, TaskScheduler.FromCurrentSynchronizationContext());
-
-            _loadingDemo.Dispose();
+            ConnectionReview();          
             //_eventInvoationList = _connectionChanged.GetInvocationList().Length;
 
             //  InvokeOnMainThread(() => showIndicator()); 
@@ -235,7 +227,7 @@ namespace SingleView
             //}
 
             //this is to simulate slow network speed to allow the overlay to be showed
-            System.Threading.Thread.Sleep(3000);
+          
             var currentConnectionType = Plugin.Connectivity.CrossConnectivity.Current.ConnectionTypes;
 
             var currentNetworkReachability = Plugin.Connectivity.Reachability.InternetConnectionStatus();
@@ -377,67 +369,6 @@ namespace SingleView
         public object SelectedValue { get; set; }
     }
 
-    public class LoadingOverlay : UIView
-    {
-        // control declarations
-        UIActivityIndicatorView activitySpinner;
-        UILabel loadingLabel;
-
-        public LoadingOverlay(CGRect frame) : base(frame)
-        {
-            // configurable bits
-            BackgroundColor = UIColor.Black;
-            Alpha = 0.75f;
-            AutoresizingMask = UIViewAutoresizing.All;
-
-            nfloat labelHeight = 22;
-            nfloat labelWidth = Frame.Width - 20;
-
-            // derive the center x and y
-            nfloat centerX = Frame.Width / 2;
-            nfloat centerY = Frame.Height / 2;
-
-            // create the activity spinner, center it horizontall and put it 5 points above center x
-            activitySpinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge);
-            activitySpinner.Frame = new CGRect(
-                centerX - (activitySpinner.Frame.Width / 2),
-                centerY - activitySpinner.Frame.Height - 20,
-                activitySpinner.Frame.Width,
-                activitySpinner.Frame.Height);
-            activitySpinner.AutoresizingMask = UIViewAutoresizing.All;
-            AddSubview(activitySpinner);
-            activitySpinner.StartAnimating();
-
-            // create and configure the "Loading Data" label
-            loadingLabel = new UILabel(new CGRect(
-                centerX - (labelWidth / 2),
-                centerY + 20,
-                labelWidth,
-                labelHeight
-                ));
-            
-            loadingLabel.BackgroundColor = UIColor.Clear;
-            loadingLabel.TextColor = UIColor.White;
-            loadingLabel.Text = NSBundle.MainBundle.LocalizedString("Loading","This message is for loading stuff");
-            
-            loadingLabel.TextAlignment = UITextAlignment.Center;
-            loadingLabel.AutoresizingMask = UIViewAutoresizing.All;
-            AddSubview(loadingLabel);
-            
-
-        }
-
-        /// <summary>
-        /// Fades out the control and then removes it from the super view
-        /// </summary>
-        public void Hide()
-        {
-            UIView.Animate(
-                1, // duration
-                () => { Alpha = 0; },
-                () => { RemoveFromSuperview(); }
-            );
-        }
-    }
+   
 
 }

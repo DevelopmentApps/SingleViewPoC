@@ -7,6 +7,7 @@ using ObjCRuntime;
 using Google.Maps;
 using System.Drawing;
 using CoreLocation;
+using System.Threading.Tasks;
 
 namespace SingleView
 {
@@ -16,6 +17,7 @@ namespace SingleView
 
         CLLocationManager _location;
 
+        LoadingOverlay _loadingDemo;
 
         public ListDemoController (IntPtr handle) : base (handle)
 		{
@@ -29,6 +31,31 @@ namespace SingleView
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
+
+            _location.DesiredAccuracy = CLLocation.AccurracyBestForNavigation;
+            _location.DistanceFilter = CLLocationDistance.FilterNone;
+
+            var bounds = UIScreen.MainScreen.Bounds;
+            _loadingDemo = new LoadingOverlay(bounds);
+            View.Add(_loadingDemo);
+            View.BringSubviewToFront(_loadingDemo);
+
+            Task.Factory.StartNew(() => { InvokeOnMainThread(() => ShowLocationOnMap()); }).ContinueWith(t =>
+            {
+                InvokeOnMainThread(() => _loadingDemo.Hide());
+            });
+
+            if (_loadingDemo != null)
+            {
+                _loadingDemo.Dispose();
+            }
+
+           
+
+        }
+
+        private void ShowLocationOnMap()
+        {
             _location.StartUpdatingLocation();
 
 
@@ -41,20 +68,6 @@ namespace SingleView
             myMap.MyLocationEnabled = true;
 
             _location.StopUpdatingLocation();
-
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-          
-
-            
-           
-
-
-
         }
 
       
