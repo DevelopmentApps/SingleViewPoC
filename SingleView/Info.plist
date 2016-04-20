@@ -6,11 +6,9 @@
 <array>
     <string>googlechromes</string>
     <string>comgooglemaps</string>
-</array>
-  <key>NSLocationAlwaysUsageDescription</key>
-  <string>This will be called if location is used behind the scenes</string>
+</array>  
   <key>NSLocationWhenInUseUsageDescription</key>
-  <string>This application requires location services while in use to work.</string>
+  <string></string>
     <key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleLocalizations</key>

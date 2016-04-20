@@ -103,6 +103,7 @@ namespace SingleView
 
             Task.Factory.StartNew(() => { InvokeOnMainThread(() => ConnectionReview()); }).ContinueWith(t => { _loadingDemo.Hide(); }, TaskScheduler.FromCurrentSynchronizationContext());
 
+            _loadingDemo.Dispose();
             //_eventInvoationList = _connectionChanged.GetInvocationList().Length;
 
             //  InvokeOnMainThread(() => showIndicator()); 
@@ -125,7 +126,9 @@ namespace SingleView
 
         private void BtnTransitionToAddress_TouchUpInside(object sender, EventArgs e)
         {
+
             NavigationController.PushViewController(_mapAddressController, true);
+
         }
 
         private void UpdateVewPicker()
@@ -241,12 +244,14 @@ namespace SingleView
             {
 
                 lblMessageToUser.Text = "seems that you are connected via wifi";
-               
+                NavigationController.PushViewController(_mapsDemoController, true);
+
             }
             else if (currentConnectionType.FirstOrDefault().ToString() == Plugin.Connectivity.Abstractions.ConnectionType.Cellular.ToString() && currentNetworkReachability.ToString() == Plugin.Connectivity.NetworkStatus.ReachableViaCarrierDataNetwork.ToString())
             {
                 lblMessageToUser.Text = "seems that you are connected via cellular";
-                
+                NavigationController.PushViewController(_mapsDemoController, true);
+
             }
             else
             {
@@ -269,22 +274,24 @@ namespace SingleView
             //    }
             //}
 
-            NavigationController.PushViewController(_mapsDemoController, true);
+           
         }
 
+
+     
 
         /////This method didn't work
         //private void showIndicator()
         //{
         //    if (spinner == null)
         //    {
-                
+
         //        spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);  
         //        spinner.HidesWhenStopped = true;
         //        spinner.Color = UIColor.Gray;
-                
+
         //    }
-                      
+
         //    View.AddSubview(spinner);
         //    View.BringSubviewToFront(spinner);
         //    spinner.StartAnimating();
@@ -426,7 +433,7 @@ namespace SingleView
         public void Hide()
         {
             UIView.Animate(
-                0.5, // duration
+                1, // duration
                 () => { Alpha = 0; },
                 () => { RemoveFromSuperview(); }
             );

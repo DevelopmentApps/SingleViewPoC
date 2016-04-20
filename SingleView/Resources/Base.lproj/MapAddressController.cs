@@ -6,6 +6,7 @@ using UIKit;
 using Google.Maps;
 using CoreLocation;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SingleView
 {
@@ -17,49 +18,78 @@ namespace SingleView
 
         Address _googleMapsAddress;
 
+        LoadingOverlay _loadingOverlay;
+
+        UIView []_views;
+
         public MapAddressController(IntPtr handle) : base(handle)
         {
             _location = new CLLocationManager();
             _location.RequestWhenInUseAuthorization();
             _googleMapsAddress = new Address();
+
+          
+
         }
 
-        public override void LoadView()
-        {
-            base.LoadView();
 
-           // _location.RequestWhenInUseAuthorization();
-        }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
 
-            _location.StartUpdatingLocation();
-            
 
-            if (CLLocationManager.LocationServicesEnabled)
+
+
+            if (_location.Location != null)
             {
-                Google.Maps.Geocoder currentGeo = new Geocoder();
-                currentGeo.ReverseGeocodeCord(_location.Location.Coordinate, ShowAddress);
-                _location.StopUpdatingLocation();
+
+                _location.DesiredAccuracy = CLLocation.AccurracyBestForNavigation;
+                _location.DistanceFilter = CLLocationDistance.FilterNone;
+
+                var bounds = UIScreen.MainScreen.Bounds;
+                _loadingOverlay = new LoadingOverlay(bounds);
+
+                View.Add(_loadingOverlay);
+                View.BringSubviewToFront(_loadingOverlay);
+
+
+                _views = View.Subviews;
+                Task.Factory.StartNew(() => { InvokeOnMainThread(() => GetCurrentUserLocation()); }).ContinueWith(t => 
+                {
+                   InvokeOnMainThread( () => _loadingOverlay.Hide());
+                });
+
+                //Task.Factory.StartNew(() =>  GetCurrentUserLocation() ).ContinueWith(t => { _loadingOverlay.Hide(); }, TaskScheduler.FromCurrentSynchronizationContext());
+
+
+                _loadingOverlay.Dispose();
+
             }
-            else if (!CLLocationManager.LocationServicesEnabled)
+            else if (_location.Location ==null)
             {
-                lblError.Text = "location services are not enabled";
+                lblError.Text = "location services are not enabled for this App.";
+                ClearLabels();
             }
 
-            lblNumCalls.Text = System.Convert.ToString(_numOfCalls += 1);
+           lblNumCalls.Text = System.Convert.ToString(_numOfCalls += 1);
         }
 
-        public override void ViewDidLoad()
+        public override void ViewWillDisappear(bool animated)
         {
-            base.ViewDidLoad();
-
-
+            base.ViewWillDisappear(animated);
+            
         }
 
-            
+        private void GetCurrentUserLocation()
+        {
+       
+
+            _location.StartUpdatingLocation();
+            Google.Maps.Geocoder currentGeo = new Geocoder();
+            currentGeo.ReverseGeocodeCord(_location.Location.Coordinate, ShowAddress);
+            _location.StopUpdatingLocation();
+        }
 
         private void ShowAddress(ReverseGeocodeResponse response, NSError error)
         {
@@ -119,4 +149,6 @@ namespace SingleView
 
 
     }
+
+
 }
