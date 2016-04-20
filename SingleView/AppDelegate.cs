@@ -2,6 +2,9 @@
 using UIKit;
 
 using Google.Maps;
+using System;
+using System.Threading.Tasks;
+using CoreLocation;
 
 namespace SingleView
 {
@@ -28,7 +31,7 @@ namespace SingleView
             // If not required for your application you can safely delete this method
 
             MapServices.ProvideAPIKey(MapsApiKey);
-
+          
             return true;
         }
 
@@ -62,5 +65,7 @@ namespace SingleView
         {
             // Called when the application is about to terminate. Save data, if needed. See also DidEnterBackground.
         }
+
+       
     }
 }

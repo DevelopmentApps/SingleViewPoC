@@ -3,6 +3,7 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 
+using ObjCRuntime;
 using Google.Maps;
 using System.Drawing;
 using CoreLocation;
@@ -19,27 +20,19 @@ namespace SingleView
         public ListDemoController (IntPtr handle) : base (handle)
 		{
             _location = new CLLocationManager();
+            _location.RequestWhenInUseAuthorization();
             myMap = new MapView();
-            _location.DesiredAccuracy = CoreLocation.CLLocation.AccurracyBestForNavigation;
+           
             
         }
 
-             
-        public override void ViewDidLoad()
+        public override void ViewDidAppear(bool animated)
         {
-            base.ViewDidLoad();
-
-           
-            _location.RequestWhenInUseAuthorization();
+            base.ViewDidAppear(animated);
+            _location.StartUpdatingLocation();
 
 
-
-            //var myCamera = CameraPosition.FromCamera(latitude: 7.2935273,
-            //    longitude: 80.6387523,
-            //    zoom: 13);
-
-
-            var myCamera = CameraPosition.FromCamera(_location.Location.Coordinate, zoom: 13);
+            var myCamera = CameraPosition.FromCamera(_location.Location.Coordinate, zoom: 17);
             myMap = MapView.FromCamera(RectangleF.Empty, myCamera);
 
             View = myMap;
@@ -47,11 +40,26 @@ namespace SingleView
             myMap.Settings.MyLocationButton = true;
             myMap.MyLocationEnabled = true;
 
-            
+            _location.StopUpdatingLocation();
+
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
           
-         
 
             
+           
+
+
+
         }
+
+      
+
+
+
     }
 }

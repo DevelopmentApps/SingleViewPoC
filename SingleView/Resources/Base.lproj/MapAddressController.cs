@@ -11,6 +11,8 @@ namespace SingleView
 {
     partial class MapAddressController : UIViewController
     {
+        int _numOfCalls = 0;
+
         CLLocationManager _location;
 
         Address _googleMapsAddress;
@@ -18,34 +20,53 @@ namespace SingleView
         public MapAddressController(IntPtr handle) : base(handle)
         {
             _location = new CLLocationManager();
+            _location.RequestWhenInUseAuthorization();
+            _googleMapsAddress = new Address();
+        }
+
+        public override void LoadView()
+        {
+            base.LoadView();
+
+           // _location.RequestWhenInUseAuthorization();
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            _location.StartUpdatingLocation();
             
 
-            _googleMapsAddress = new Address();
+            if (CLLocationManager.LocationServicesEnabled)
+            {
+                Google.Maps.Geocoder currentGeo = new Geocoder();
+                currentGeo.ReverseGeocodeCord(_location.Location.Coordinate, ShowAddress);
+                _location.StopUpdatingLocation();
+            }
+            else if (!CLLocationManager.LocationServicesEnabled)
+            {
+                lblError.Text = "location services are not enabled";
+            }
+
+            lblNumCalls.Text = System.Convert.ToString(_numOfCalls += 1);
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
-            //_location.RequestWhenInUseAuthorization();
-            //_location.StartUpdatingLocation();
 
-
-            // _location.LocationsUpdated += _location_LocationsUpdated;
-
-           
-
-            Google.Maps.Geocoder currentGeo = new Geocoder();
-
-            //_location.RequestLocation();
-
-            currentGeo.ReverseGeocodeCord(_location.Location.Coordinate,ShowAddress);
         }
+
+            
 
         private void ShowAddress(ReverseGeocodeResponse response, NSError error)
         {
             if (error == null)
             {
+                lblError.Text = string.Empty;
+                lblErrorDomain.Text = string.Empty;
                 StringBuilder fullAddress = new StringBuilder();
 
                 _googleMapsAddress = response.FirstResult;
@@ -73,19 +94,29 @@ namespace SingleView
             else if (error != null)
             {
                 lblError.Text = error.LocalizedDescription;
+                lblErrorDomain.Text = error.Domain;
+                ClearLabels();
             }
         }
 
-        
-       
+        private void ClearLabels()
+        {
 
-        //private void _location_LocationsUpdated(object sender, CLLocationsUpdatedEventArgs e)
-        //{
-        //    foreach (var item in e.Locations)
-        //    {
-        //        lblLatitude.Text = System.Convert.ToString(item.Coordinate.Latitude);
-        //        lblLongitude.Text = System.Convert.ToString(item.Coordinate.Longitude);
-        //    }
-        //}
+            lblLatitude.Text = string.Empty;
+            lblLongitude.Text = string.Empty;
+
+            lblCountry.Text = string.Empty;
+            lblAdministrativeArea.Text = string.Empty;
+            lblLocality.Text = string.Empty;
+            lblSublocality.Text = string.Empty;
+            lblPostalCode.Text = string.Empty;
+            lblThoroughfare.Text = string.Empty;
+            lblAddressLines.Text = string.Empty;
+        }
+
+
+
+
+
     }
 }

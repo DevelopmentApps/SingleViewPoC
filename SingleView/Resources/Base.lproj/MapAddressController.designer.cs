@@ -32,6 +32,10 @@ namespace SingleView
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel lblErrorDomain { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel lblLatitude { get; set; }
 
 		[Outlet]
@@ -41,6 +45,10 @@ namespace SingleView
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UILabel lblLongitude { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel lblNumCalls { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -72,6 +80,10 @@ namespace SingleView
 				lblError.Dispose ();
 				lblError = null;
 			}
+			if (lblErrorDomain != null) {
+				lblErrorDomain.Dispose ();
+				lblErrorDomain = null;
+			}
 			if (lblLatitude != null) {
 				lblLatitude.Dispose ();
 				lblLatitude = null;
@@ -83,6 +95,10 @@ namespace SingleView
 			if (lblLongitude != null) {
 				lblLongitude.Dispose ();
 				lblLongitude = null;
+			}
+			if (lblNumCalls != null) {
+				lblNumCalls.Dispose ();
+				lblNumCalls = null;
 			}
 			if (lblPostalCode != null) {
 				lblPostalCode.Dispose ();
