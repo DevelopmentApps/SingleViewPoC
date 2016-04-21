@@ -18,7 +18,7 @@ namespace SingleView
 
         Address _googleMapsAddress;
 
-        
+            
         LoadingOverlay _loadingOverlay;             
 
         public MapAddressController(IntPtr handle) : base(handle)
@@ -76,12 +76,25 @@ namespace SingleView
 
         private void GetCurrentUserLocation()
         {
-       
 
-            _location.StartUpdatingLocation();
+            ////This code is for real update location
+            //_location.StartUpdatingLocation();
+            //Google.Maps.Geocoder currentGeo = new Geocoder();
+            //currentGeo.ReverseGeocodeCord(_location.Location.Coordinate, ShowAddress);
+            //_location.StopUpdatingLocation();
+
+
+            ////This code is for fake location
+            ////This is Washington DC
+            //CLLocationCoordinate2D fakeLocation = new CLLocationCoordinate2D(38.910486, -77.039297);
+            ////This is puebla city and a neighborhood
+            //CLLocationCoordinate2D fakeLocation = new CLLocationCoordinate2D(19.040667, -98.212204);
+            ////Queretaro City and a neighborhood
+            //CLLocationCoordinate2D fakeLocation = new CLLocationCoordinate2D(20.638512, -100.111806);
+            ////Baja California Sur
+            CLLocationCoordinate2D fakeLocation = new CLLocationCoordinate2D(24.143993, -110.316417);
             Google.Maps.Geocoder currentGeo = new Geocoder();
-            currentGeo.ReverseGeocodeCord(_location.Location.Coordinate, ShowAddress);
-            _location.StopUpdatingLocation();
+            currentGeo.ReverseGeocodeCord(fakeLocation, ShowAddress);
         }
 
         private void ShowAddress(ReverseGeocodeResponse response, NSError error)
@@ -97,16 +110,17 @@ namespace SingleView
                 lblLatitude.Text = System.Convert.ToString(response.FirstResult.Coordinate.Latitude);
                 lblLongitude.Text = System.Convert.ToString(response.FirstResult.Coordinate.Longitude);
 
-                lblCountry.Text = _googleMapsAddress.Country;
-                lblAdministrativeArea.Text = _googleMapsAddress.AdministrativeArea;
-                lblLocality.Text = _googleMapsAddress.Locality;
-                lblSublocality.Text = _googleMapsAddress.SubLocality;
-                lblPostalCode.Text = _googleMapsAddress.PostalCode;
+                lblCountry.Text = _googleMapsAddress.Country + " Country";
+                lblAdministrativeArea.Text = _googleMapsAddress.AdministrativeArea + " AdminArea";
+                lblLocality.Text = _googleMapsAddress.Locality + " Locality";
+                lblSublocality.Text = _googleMapsAddress.SubLocality + " SubLocal";
+                lblPostalCode.Text = _googleMapsAddress.PostalCode + " Zip";
                 lblThoroughfare.Text = _googleMapsAddress.Thoroughfare + " Thorough";
 
                 foreach (var item in response.FirstResult.Lines)
                 {
                     fullAddress.Append(item).Append(" ");
+                   
                 }
 
                 fullAddress.Length--;
