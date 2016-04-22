@@ -13,32 +13,49 @@ namespace SingleView
 
         bool _viewOnScreen = false;
 
+        UIWindow _window;
+
+        BannerView _adView;
+
         public GogAdsController (IntPtr handle) : base (handle)
 		{
-		}
-        public override void ViewDidLoad()
+            _window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+           
+
+            
+        }
+
+        public override void ViewWillAppear(bool animated)
         {
-            base.ViewDidLoad();
+            base.ViewWillAppear(animated);
 
             ShowBannerIntoView();
+
+          
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+            _adView.Dispose();
         }
 
         private void ShowBannerIntoView()
         {
 
-            var adView = new BannerView(size: AdSizeCons.SmartBannerPortrait, origin: new CGPoint(-10, 0))
+            _adView = new BannerView(size: AdSizeCons.SmartBannerPortrait, origin: new CGPoint(0, _window.Bounds.Bottom - 50))
             {
                 AdUnitID = _bannerId,
                 RootViewController = this
             };
 
-            adView.AdReceived += (object sender, EventArgs e) =>
-            {
-                if (!_viewOnScreen)
-                    View.AddSubview(adView);
+            _adView.AdReceived += (object sender, EventArgs e) =>
+            {                
+                    View.AddSubview(_adView);
                 _viewOnScreen = true;
             };
-            adView.LoadRequest(Request.GetDefaultRequest());
+            _adView.LoadRequest(Request.GetDefaultRequest());
         }
     }
 }
