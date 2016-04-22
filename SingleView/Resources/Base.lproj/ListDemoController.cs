@@ -74,7 +74,7 @@ namespace SingleView
             _location.StopUpdatingLocation();
         }
 
-      
+       
 
 
 

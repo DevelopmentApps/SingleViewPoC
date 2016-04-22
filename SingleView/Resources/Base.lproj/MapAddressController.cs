@@ -6,8 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CoreLocation;
 using Google.Maps;
-using Google.MobileAds;
-using CoreGraphics;
+
 
 namespace SingleView
 {
