@@ -24,6 +24,10 @@ namespace SingleView
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton btnPlaces { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton btnTransition { get; set; }
 
 		[Outlet]
@@ -39,6 +43,10 @@ namespace SingleView
 			if (btnDemo != null) {
 				btnDemo.Dispose ();
 				btnDemo = null;
+			}
+			if (btnPlaces != null) {
+				btnPlaces.Dispose ();
+				btnPlaces = null;
 			}
 			if (btnTransition != null) {
 				btnTransition.Dispose ();

@@ -117,11 +117,15 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GogAdsController.cs" />
-    <Compile Include="GogAdsController.designer.cs">
+    <Compile Include="Resources\Base.lproj\GogAdsController.cs" />
+    <Compile Include="Resources\Base.lproj\GogAdsController.designer.cs">
       <DependentUpon>GogAdsController.cs</DependentUpon>
     </Compile>
     <Compile Include="LoadingOverlay.cs" />
+    <Compile Include="Resources\Base.lproj\PlacesController.cs" />
+    <Compile Include="Resources\Base.lproj\PlacesController.designer.cs">
+      <DependentUpon>PlacesController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Base.lproj\MapAddressController.cs" />
     <Compile Include="Resources\Base.lproj\MapAddressController.designer.cs">
       <DependentUpon>MapAddressController.cs</DependentUpon>

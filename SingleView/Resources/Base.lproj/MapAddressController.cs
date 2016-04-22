@@ -143,7 +143,7 @@ namespace SingleView
 
         private void ClearLabels()
         {
-
+            
             lblLatitude.Text = string.Empty;
             lblLongitude.Text = string.Empty;
 

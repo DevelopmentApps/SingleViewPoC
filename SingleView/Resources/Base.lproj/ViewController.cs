@@ -11,6 +11,8 @@ namespace SingleView
 
         private GogAdsController _adsController;
 
+        private PlacesController _placesController;
+
         public ViewController(IntPtr handle) : base(handle)
         {
 
@@ -24,6 +26,8 @@ namespace SingleView
 
             _adsController = Storyboard.InstantiateViewController("GogAdsController") as GogAdsController;
 
+            _placesController = Storyboard.InstantiateViewController("PlacesController") as PlacesController;
+
         }
 
         public override void ViewDidLoad()
@@ -36,15 +40,19 @@ namespace SingleView
           
 
             btnDemo.TouchUpInside += BtnDemo_TouchUpInside;
+
             btnTransition.TouchUpInside += BtnTransition_TouchUpInside;
+
             btnAd.TouchUpInside += BtnAd_TouchUpInside;
+
+            btnPlaces.TouchUpInside += BtnPlaces_TouchUpInside;
            
 
 
 
         }
 
-        
+       
 
         public override void ViewWillAppear(bool animated)
         {
@@ -133,7 +141,13 @@ namespace SingleView
         }
         private void BtnAd_TouchUpInside(object sender, EventArgs e)
         {
+         
             NavigationController.PushViewController(_adsController, true);
+        }
+
+        private void BtnPlaces_TouchUpInside(object sender, EventArgs e)
+        {
+            NavigationController.PushViewController(_placesController, true);
         }
 
         private void OkButtonAction(UIAlertAction obj)
