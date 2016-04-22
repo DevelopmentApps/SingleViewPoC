@@ -9,7 +9,7 @@ namespace SingleView
      
         private UiDemoController _demoController;
 
-
+        private GogAdsController _adsController;
 
         public ViewController(IntPtr handle) : base(handle)
         {
@@ -21,7 +21,9 @@ namespace SingleView
 
                 //this allows to register the controller so we can perform a segue withouth a "classic" segue
                 _demoController = Storyboard.InstantiateViewController("UiDemoController") as UiDemoController;
-           
+
+            _adsController = Storyboard.InstantiateViewController("GogAdsController") as GogAdsController;
+
         }
 
         public override void ViewDidLoad()
@@ -35,14 +37,14 @@ namespace SingleView
 
             btnDemo.TouchUpInside += BtnDemo_TouchUpInside;
             btnTransition.TouchUpInside += BtnTransition_TouchUpInside;
-
+            btnAd.TouchUpInside += BtnAd_TouchUpInside;
            
 
 
 
         }
 
-
+        
 
         public override void ViewWillAppear(bool animated)
         {
@@ -129,7 +131,11 @@ namespace SingleView
             }
 
         }
-        
+        private void BtnAd_TouchUpInside(object sender, EventArgs e)
+        {
+            NavigationController.PushViewController(_adsController, true);
+        }
+
         private void OkButtonAction(UIAlertAction obj)
         {
             

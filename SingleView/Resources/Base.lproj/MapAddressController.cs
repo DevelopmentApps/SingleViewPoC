@@ -2,11 +2,12 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
-
-using Google.Maps;
-using CoreLocation;
 using System.Text;
 using System.Threading.Tasks;
+using CoreLocation;
+using Google.Maps;
+using Google.MobileAds;
+using CoreGraphics;
 
 namespace SingleView
 {
@@ -17,9 +18,12 @@ namespace SingleView
         CLLocationManager _location;
 
         Address _googleMapsAddress;
-
             
-        LoadingOverlay _loadingOverlay;             
+        LoadingOverlay _loadingOverlay;
+
+       
+
+       
 
         public MapAddressController(IntPtr handle) : base(handle)
         {
@@ -37,7 +41,7 @@ namespace SingleView
         {
             base.ViewDidAppear(animated);
 
-
+          
 
 
             if (_location.Location != null)
@@ -135,6 +139,8 @@ namespace SingleView
                 ClearLabels();
             }
         }
+
+       
 
         private void ClearLabels()
         {

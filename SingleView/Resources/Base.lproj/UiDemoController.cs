@@ -19,7 +19,7 @@ namespace SingleView
 
         MapAddressController _mapAddressController;
 
-       
+        
 
         //UIActivityIndicatorView spinner;
 
@@ -39,6 +39,8 @@ namespace SingleView
             _mapsDemoController = Storyboard.InstantiateViewController("ListDemoController") as ListDemoController;
 
             _mapAddressController = Storyboard.InstantiateViewController("MapAddressController") as MapAddressController;
+
+          
 
           
 
@@ -66,7 +68,7 @@ namespace SingleView
 
             btnNewPage.TouchUpInside += BtnNewPage_TouchUpInside;
             btnTransitionToAddress.TouchUpInside += BtnTransitionToAddress_TouchUpInside;
-
+            
            
             lblTexto.Enabled = false;           
             this.Title = MessageToShow;

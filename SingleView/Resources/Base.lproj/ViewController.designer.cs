@@ -14,7 +14,9 @@ namespace SingleView
 	[Register ("ViewController")]
 	partial class ViewController
 	{
-		
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton btnAd { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -30,7 +32,10 @@ namespace SingleView
 
 		void ReleaseDesignerOutlets ()
 		{
-			
+			if (btnAd != null) {
+				btnAd.Dispose ();
+				btnAd = null;
+			}
 			if (btnDemo != null) {
 				btnDemo.Dispose ();
 				btnDemo = null;
