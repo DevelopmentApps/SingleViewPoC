@@ -11,8 +11,7 @@ namespace SingleView
 	{
         const string _bannerId = "ca-app-pub-9392740787233531/5815325201";
 
-        bool _viewOnScreen = false;
-
+        
         UIWindow _window;
 
         BannerView _adView;
@@ -53,7 +52,7 @@ namespace SingleView
             _adView.AdReceived += (object sender, EventArgs e) =>
             {                
                     View.AddSubview(_adView);
-                _viewOnScreen = true;
+            
             };
             _adView.LoadRequest(Request.GetDefaultRequest());
         }
