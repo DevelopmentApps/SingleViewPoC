@@ -11,7 +11,7 @@ namespace SingleView
 
         private GogAdsController _adsController;
 
-        private PlacesController _placesController;
+       
 
         private FoursquareVenueController _foursquareVenueController;
 
@@ -28,7 +28,7 @@ namespace SingleView
 
             _adsController = Storyboard.InstantiateViewController("GogAdsController") as GogAdsController;
 
-            _placesController = Storyboard.InstantiateViewController("PlacesController") as PlacesController;
+           
 
             _foursquareVenueController = Storyboard.InstantiateViewController("FoursquareVenueController") as FoursquareVenueController;
          
@@ -50,7 +50,7 @@ namespace SingleView
 
             btnAd.TouchUpInside += BtnAd_TouchUpInside;
 
-            btnPlaces.TouchUpInside += BtnPlaces_TouchUpInside;
+           
 
             btnFoursquare.TouchUpInside += BtnFoursquare_TouchUpInside;
 
@@ -148,10 +148,7 @@ namespace SingleView
             NavigationController.PushViewController(_adsController, true);
         }
 
-        private void BtnPlaces_TouchUpInside(object sender, EventArgs e)
-        {
-            NavigationController.PushViewController(_placesController, true);
-        }
+       
 
         private void BtnFoursquare_TouchUpInside(object sender, EventArgs e)
         {

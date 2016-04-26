@@ -136,10 +136,6 @@
     </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <BundleResource Include="Resources\Base.lproj\PlacesController.cs" />
-    <BundleResource Include="Resources\Base.lproj\PlacesController.designer.cs">
-      <DependentUpon>PlacesController.cs</DependentUpon>
-    </BundleResource>
     <Compile Include="RootTableSource.cs" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="Info.plist">

@@ -16,10 +16,18 @@ namespace SingleView
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel lblError { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UITableView tblView { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (lblError != null) {
+				lblError.Dispose ();
+				lblError = null;
+			}
 			if (tblView != null) {
 				tblView.Dispose ();
 				tblView = null;

@@ -31,6 +31,7 @@ namespace SingleView
             var cell = tableView.DequeueReusableCell(cellIdentifier);
             // now set the properties as normal
             cell.TextLabel.Text = tableItems[indexPath.Row].name;
+            cell.Accessory = UITableViewCellAccessory.DetailButton;
            
             return cell;
         }
