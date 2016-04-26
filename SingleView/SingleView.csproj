@@ -68,7 +68,7 @@
     <CodesignResourceRules />
     <CodesignExtraArgs />
     <MtouchSdkVersion>9.3</MtouchSdkVersion>
-    <MtouchLink>Full</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchProfiling>False</MtouchProfiling>
     <MtouchFastDev>False</MtouchFastDev>
     <MtouchUseLlvm>False</MtouchUseLlvm>
@@ -171,8 +171,12 @@
       <HintPath>..\packages\Xamarin.Google.iOS.MobileAds.7.6.0.2\lib\Xamarin.iOS10\Google.MobileAds.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PetWee.ThirdParty.Foursquare.Dto">
-      <HintPath>..\..\..\Users\itpro\Documents\Visual Studio 2015\Projects\PetWee.ThirdParty.Foursquare.Dto\PetWee.ThirdParty.Foursquare.Dto\bin\Debug\PetWee.ThirdParty.Foursquare.Dto.dll</HintPath>
+      <HintPath>..\..\..\Users\itpro\Documents\Visual Studio 2015\Projects\PetWee.ThirdParty.Foursquare.Dto\PetWee.ThirdParty.Foursquare.Dto\bin\Release\PetWee.ThirdParty.Foursquare.Dto.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Connectivity, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugin.Connectivity.2.1.2\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>
