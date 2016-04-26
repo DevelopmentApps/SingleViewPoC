@@ -24,6 +24,10 @@ namespace SingleView
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton btnFoursquare { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton btnPlaces { get; set; }
 
 		[Outlet]
@@ -43,6 +47,10 @@ namespace SingleView
 			if (btnDemo != null) {
 				btnDemo.Dispose ();
 				btnDemo = null;
+			}
+			if (btnFoursquare != null) {
+				btnFoursquare.Dispose ();
+				btnFoursquare = null;
 			}
 			if (btnPlaces != null) {
 				btnPlaces.Dispose ();

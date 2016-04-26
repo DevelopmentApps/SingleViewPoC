@@ -117,6 +117,10 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Resources\Base.lproj\FoursquareVenueController.cs" />
+    <Compile Include="Resources\Base.lproj\FoursquareVenueController.designer.cs">
+      <DependentUpon>FoursquareVenueController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Base.lproj\GogAdsController.cs" />
     <Compile Include="Resources\Base.lproj\GogAdsController.designer.cs">
       <DependentUpon>GogAdsController.cs</DependentUpon>
@@ -167,12 +171,19 @@
       <HintPath>..\packages\Xamarin.Google.iOS.MobileAds.7.6.0.2\lib\Xamarin.iOS10\Google.MobileAds.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PetWee.ThirdParty.Foursquare.Dto">
+      <HintPath>..\..\..\Users\itpro\Documents\Visual Studio 2015\Projects\PetWee.ThirdParty.Foursquare.Dto\PetWee.ThirdParty.Foursquare.Dto\bin\Debug\PetWee.ThirdParty.Foursquare.Dto.dll</HintPath>
+    </Reference>
     <Reference Include="Plugin.Connectivity, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugin.Connectivity.2.1.2\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Plugin.Connectivity.Abstractions, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugin.Connectivity.2.1.2\lib\Xamarin.iOS10\Plugin.Connectivity.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\Xamarin.iOS10\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

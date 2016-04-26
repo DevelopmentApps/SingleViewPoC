@@ -13,6 +13,8 @@ namespace SingleView
 
         private PlacesController _placesController;
 
+        private FoursquareVenueController _foursquareVenueController;
+
         public ViewController(IntPtr handle) : base(handle)
         {
 
@@ -27,6 +29,9 @@ namespace SingleView
             _adsController = Storyboard.InstantiateViewController("GogAdsController") as GogAdsController;
 
             _placesController = Storyboard.InstantiateViewController("PlacesController") as PlacesController;
+
+            _foursquareVenueController = Storyboard.InstantiateViewController("FoursquareVenueController") as FoursquareVenueController;
+         
 
         }
 
@@ -46,13 +51,11 @@ namespace SingleView
             btnAd.TouchUpInside += BtnAd_TouchUpInside;
 
             btnPlaces.TouchUpInside += BtnPlaces_TouchUpInside;
-           
+
+            btnFoursquare.TouchUpInside += BtnFoursquare_TouchUpInside;
 
 
-
-        }
-
-       
+        }       
 
         public override void ViewWillAppear(bool animated)
         {
@@ -148,6 +151,11 @@ namespace SingleView
         private void BtnPlaces_TouchUpInside(object sender, EventArgs e)
         {
             NavigationController.PushViewController(_placesController, true);
+        }
+
+        private void BtnFoursquare_TouchUpInside(object sender, EventArgs e)
+        {
+            NavigationController.PushViewController(_foursquareVenueController, true);
         }
 
         private void OkButtonAction(UIAlertAction obj)
