@@ -14,8 +14,16 @@ namespace SingleView
 	[Register ("FoursquareVenueController")]
 	partial class FoursquareVenueController
 	{
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UITableView tblView { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
+			if (tblView != null) {
+				tblView.Dispose ();
+				tblView = null;
+			}
 		}
 	}
 }

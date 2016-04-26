@@ -39,6 +39,7 @@ namespace SingleView
             var request = new RestSharp.RestRequest();          
             request.AddParameter("ll", "19.369084, -99.179388");
             request.AddParameter("limit", 50);
+            request.AddParameter("query", "pet friendly");
             request.AddParameter("client_id", _clientId);
             request.AddParameter("client_secret", _clientSecret);
             request.AddParameter("v", _versioningDate);
@@ -49,6 +50,7 @@ namespace SingleView
 
             var parsedObject = JsonConvert.DeserializeObject<VenueResponse>(jsonSerializer["response"].ToString());
 
+            tblView.Source = new RootTableSource(parsedObject.Venues.ToArray());
         }
     }
 }
