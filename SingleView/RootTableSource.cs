@@ -32,13 +32,22 @@ namespace SingleView
             // now set the properties as normal
             cell.TextLabel.Text = tableItems[indexPath.Row].name;
             cell.Accessory = UITableViewCellAccessory.DetailButton;
+          
            
             return cell;
+        }
+
+        public override void AccessoryButtonTapped(UITableView tableView, NSIndexPath indexPath)
+        {
+            // base.AccessoryButtonTapped(tableView, indexPath);
+            new UIAlertView("DetailDisclosureButton Touched"
+                 , tableItems[indexPath.Row].id, null, "OK", null).Show();
         }
 
         public Venue GetItem(int id)
         {
             return tableItems[id];
         }
+        
     }
 }

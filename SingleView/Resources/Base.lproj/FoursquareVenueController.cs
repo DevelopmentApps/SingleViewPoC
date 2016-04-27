@@ -39,6 +39,9 @@ namespace SingleView
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+           
+           
+
 
             if (_location.Location != null)
             {
@@ -53,6 +56,8 @@ namespace SingleView
                 currentLocation.Append(System.Convert.ToString(_location.Location.Coordinate.Longitude));
 
                 SearchVenues(currentLocation.ToString());
+
+                GetIndividualVenueInformation("4b05870bf964a520ff7c22e3");
 
                 _location.StopUpdatingLocation();
 
@@ -89,6 +94,24 @@ namespace SingleView
             var parsedObject = JsonConvert.DeserializeObject<VenueResponse>(jsonSerializer["response"].ToString());
 
             tblView.Source = new RootTableSource(parsedObject.Venues.ToArray());
+                       
+        }
+
+        private void GetIndividualVenueInformation(string venueId)
+        {
+            var restClient = new RestSharp.RestClient("https://api.foursquare.com/v2/venues/" + venueId);
+
+            var request = new RestSharp.RestRequest();
+            request.AddParameter("client_id", _clientId);
+            request.AddParameter("client_secret", _clientSecret);
+            request.AddParameter("v", _versioningDate);
+            request.AddParameter("m", _responseFormat);
+
+            var response = restClient.Execute(request);
+
+            JObject jsonSerializer = JObject.Parse(response.Content);
+
+            var parsedObject = JsonConvert.DeserializeObject<SingleVenueResponse>(jsonSerializer["response"].ToString());
         }
 
         private void ClearLabels()
