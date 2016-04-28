@@ -10,15 +10,25 @@ using System.Text;
 
 namespace SingleView
 {
+    
 
     public class RootTableSource : UITableViewSource
     {
+        DirectionsController _directionsController;
+
         Venue[] tableItems;
+        UIViewController _parentController;
+
         string cellIdentifier = "venuecell";
 
-        public RootTableSource(Venue[] items)
+
+        public RootTableSource(Venue[] items, UIViewController parentController)
         {
             tableItems = items;
+            _parentController = parentController;
+
+            _directionsController = _parentController.Storyboard.InstantiateViewController("DirectionsController") as DirectionsController;
+
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
@@ -42,6 +52,7 @@ namespace SingleView
 
         {
             string currentLanguage = string.Empty;
+
             if (NSLocale.PreferredLanguages.Length > 0)
             {
                 currentLanguage = NSLocale.PreferredLanguages[0];
@@ -51,6 +62,7 @@ namespace SingleView
             //string messageAlertCaption = NSBundle.MainBundle.LocalizedString("QuickInfo", "This message is the caption of the alert");
 
             SingleVenueInfo venueInfo = new SingleVenueInfo();
+
             var singleVenueResponse = venueInfo.GetIndividualVenueInformation(tableItems[indexPath.Row].id,currentLanguage);
 
             // base.AccessoryButtonTapped(tableView, indexPath);
@@ -59,31 +71,70 @@ namespace SingleView
 
             if (singleVenueResponse != null)
             {
+                
                 if (singleVenueResponse.venue.hours != null)
                 {
                     if (!string.IsNullOrEmpty(singleVenueResponse.venue.hours.status))
                     {
-                        quickDetails.Append(singleVenueResponse.venue.hours.status).Append("\n");
+                        quickDetails.Append(singleVenueResponse.venue.hours.status).Append("\n\n");
                     }
                     if (singleVenueResponse.venue.hours.timeframes != null)
                     {
+                        
                         foreach (var timeFrame in singleVenueResponse.venue.hours.timeframes)
                         {
                             quickDetails.Append(timeFrame.days).Append("\n");
-                            foreach (var schedule in timeFrame.open)
-                            {
-                                quickDetails.Append(schedule.renderedTime).Append("\n");
-                            }
 
+                            for (int i = 0; i < timeFrame.open.Count; i++)
+                            {
+
+                                foreach (var schedule in timeFrame.open)
+                                {
+
+
+                                    quickDetails.Append(schedule.renderedTime).Append("\n");
+                                    if (i == timeFrame.open.Count - 1)
+                                    {
+                                        quickDetails.Append("\n");
+                                    }
+                                }
+                            }
+                           
+                        }
+                    }
+                }
+
+                if (singleVenueResponse.venue.location != null)
+                {
+                    
+                    if (singleVenueResponse.venue.location.formattedAddress != null)
+                    {
+                        foreach (var addressLine in singleVenueResponse.venue.location.formattedAddress)
+                        {
+                            quickDetails.Append(addressLine).Append("\n");
                         }
                     }
                 }
             }
-           
 
-            new UIAlertView(tableItems[indexPath.Row].name
-                 , quickDetails.ToString(), null, "OK", null).Show();
+            ////deprecated uiAlertView
+            //new UIAlertView(tableItems[indexPath.Row].name, quickDetails.ToString(), null, "OK", null).Show();
+
+            var quickInfoAlertController = UIAlertController.Create(tableItems[indexPath.Row].name, quickDetails.ToString(), UIAlertControllerStyle.Alert);
+
+            quickInfoAlertController.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Default, null));
+            quickInfoAlertController.AddAction(UIAlertAction.Create("Get Directions", UIAlertActionStyle.Default, action =>
+            {
+                _parentController.NavigationController.PushViewController(_directionsController, true);
+
+            }));
+
+            _parentController.PresentViewController(quickInfoAlertController, true, null);
+            
+            
         }
+
+       
 
         public Venue GetItem(int id)
         {

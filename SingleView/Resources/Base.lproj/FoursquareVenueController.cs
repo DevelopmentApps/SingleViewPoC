@@ -113,9 +113,12 @@ namespace SingleView
             JObject jsonSerializer = JObject.Parse(response.Content);
 
             _allVenues = JsonConvert.DeserializeObject<VenueResponse>(jsonSerializer["response"].ToString());
+            
+            RootTableSource venues = new RootTableSource(_allVenues.Venues.ToArray(),this);
 
-            tblView.Source = new RootTableSource(_allVenues.Venues.ToArray());
-                       
+            tblView.Source = venues;
+            tblView.ReloadData();
+               
         }
 
         

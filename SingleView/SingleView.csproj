@@ -117,6 +117,10 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Resources\Base.lproj\DirectionsController.cs" />
+    <Compile Include="Resources\Base.lproj\DirectionsController.designer.cs">
+      <DependentUpon>DirectionsController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Base.lproj\FoursquareVenueController.cs" />
     <Compile Include="Resources\Base.lproj\FoursquareVenueController.designer.cs">
       <DependentUpon>FoursquareVenueController.cs</DependentUpon>
