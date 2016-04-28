@@ -137,6 +137,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="RootTableSource.cs" />
+    <Compile Include="SingleVenueInfo.cs" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>
@@ -172,8 +173,9 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PetWee.ThirdParty.Foursquare.Dto">
-      <HintPath>..\..\..\Users\itpro\Documents\Visual Studio 2015\Projects\PetWee.ThirdParty.Foursquare.Dto\PetWee.ThirdParty.Foursquare.Dto\bin\Release\PetWee.ThirdParty.Foursquare.Dto.dll</HintPath>
+    <Reference Include="PetWee.ThirdParty.Foursquare.Dto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Users\itpro\Documents\Visual Studio 2015\Projects\PetWee\PetWee.ThirdParty.Foursquare.Dto\bin\Release\PetWee.ThirdParty.Foursquare.Dto.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Connectivity, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugin.Connectivity.2.1.2\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>

@@ -1,13 +1,18 @@
-using CoreLocation;
-using Foundation;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using PetWee.ThirdParty.Foursquare.Dto;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Text;
+
 using UIKit;
+using CoreLocation;
+using Foundation;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using RestSharp;
+
+using PetWee.ThirdParty.Foursquare.Dto;
 
 namespace SingleView
 {
@@ -19,6 +24,8 @@ namespace SingleView
         private string _responseFormat;
 
         CLLocationManager _location;
+        
+        VenueResponse _allVenues;
 
         private UIWindow _window;
 
@@ -39,13 +46,15 @@ namespace SingleView
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-           
-           
 
-
+            string currentLanguage = string.Empty;
+            if (NSLocale.PreferredLanguages.Length > 0)
+            {
+                currentLanguage = NSLocale.PreferredLanguages[0];
+            }
+            
             if (_location.Location != null)
             {
-
                 _location.DesiredAccuracy = CLLocation.AccurracyBestForNavigation;
                 _location.DistanceFilter = CLLocationDistance.FilterNone;
                 _location.StartUpdatingLocation();
@@ -54,11 +63,10 @@ namespace SingleView
                 currentLocation.Append(System.Convert.ToString(_location.Location.Coordinate.Latitude));
                 currentLocation.Append(",");
                 currentLocation.Append(System.Convert.ToString(_location.Location.Coordinate.Longitude));
-
-                SearchVenues(currentLocation.ToString());
-
-                GetIndividualVenueInformation("4b05870bf964a520ff7c22e3");
-
+                
+                SearchVenues(currentLocation.ToString(),currentLanguage);
+               
+                
                 _location.StopUpdatingLocation();
 
             }
@@ -70,15 +78,27 @@ namespace SingleView
             
         }
 
-        
-
-        private void SearchVenues(string location)
+        public override void ViewWillDisappear(bool animated)
         {
-            
+            base.ViewWillDisappear(animated);
 
-            var restClient = new RestSharp.RestClient("https://api.foursquare.com/v2/venues/search");
-            
-            var request = new RestSharp.RestRequest();
+           
+        }
+
+        private void SearchVenues(string location, string language)
+        {
+            if (!string.IsNullOrWhiteSpace(language))
+            {
+                language.Substring(0, 2);
+            }
+            else if (string.IsNullOrWhiteSpace(language))
+            {
+                language = "en";
+            }
+
+           RestClient client = new RestClient("https://api.foursquare.com/v2/venues/search");
+
+            RestRequest request = new RestRequest();
             //request.AddParameter("ll", "19.369084, -99.179388");
             request.AddParameter("ll", location);
             request.AddParameter("limit", 50);
@@ -87,32 +107,18 @@ namespace SingleView
             request.AddParameter("client_secret", _clientSecret);
             request.AddParameter("v", _versioningDate);
             request.AddParameter("m", _responseFormat);
-            var response = restClient.Execute(request);
+            request.AddHeader("Accept-Language", language);
+            var response = client.Execute(request);
 
             JObject jsonSerializer = JObject.Parse(response.Content);
 
-            var parsedObject = JsonConvert.DeserializeObject<VenueResponse>(jsonSerializer["response"].ToString());
+            _allVenues = JsonConvert.DeserializeObject<VenueResponse>(jsonSerializer["response"].ToString());
 
-            tblView.Source = new RootTableSource(parsedObject.Venues.ToArray());
+            tblView.Source = new RootTableSource(_allVenues.Venues.ToArray());
                        
         }
 
-        private void GetIndividualVenueInformation(string venueId)
-        {
-            var restClient = new RestSharp.RestClient("https://api.foursquare.com/v2/venues/" + venueId);
-
-            var request = new RestSharp.RestRequest();
-            request.AddParameter("client_id", _clientId);
-            request.AddParameter("client_secret", _clientSecret);
-            request.AddParameter("v", _versioningDate);
-            request.AddParameter("m", _responseFormat);
-
-            var response = restClient.Execute(request);
-
-            JObject jsonSerializer = JObject.Parse(response.Content);
-
-            var parsedObject = JsonConvert.DeserializeObject<SingleVenueResponse>(jsonSerializer["response"].ToString());
-        }
+        
 
         private void ClearLabels()
         {
