@@ -36,7 +36,7 @@ namespace SingleView
             var originMarker = new Marker { Position = origin, Map = _map };
             var destinationMarker = new Marker { Position = destination, Map = _map};
 
-            SetDirectionsQuery();
+            PrepareDirectionsRestQuery();
         }
 
         //public override void DidTapAtCoordinate(MapView mapView, CLLocationCoordinate2D coordinate)
@@ -53,7 +53,7 @@ namespace SingleView
         //}
 
 
-        private void SetDirectionsQuery()
+        private void PrepareDirectionsRestQuery()
         {
            
             if (Lines.Count > 0)
@@ -81,7 +81,7 @@ namespace SingleView
            
 
             //Get directions through Google Web Service
-            var directionsTask = GetDirections(sb.ToString());
+            var directionsTask = ConsultAndGetDirections(sb.ToString());
 
             var jSonData = directionsTask;
 
@@ -108,7 +108,7 @@ namespace SingleView
 
         }
 
-        private String GetDirections(string url)
+        private String ConsultAndGetDirections(string url)
         {
             var client = new RestSharp.RestClient(url);
 
