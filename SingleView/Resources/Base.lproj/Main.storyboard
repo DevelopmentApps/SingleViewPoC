@@ -446,7 +446,7 @@
         </scene>
         <scene sceneID="963">
             <objects>
-                <viewController id="964" sceneMemberID="viewController" customClass="DirectionsController" storyboardIdentifier="DirectionsController">
+                <viewController id="964" sceneMemberID="viewController" customClass="PlaceDirectionsController" storyboardIdentifier="PlaceDirectionsController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="961"/>
                         <viewControllerLayoutGuide type="bottom" id="962"/>
@@ -455,18 +455,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="971" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="31" y="70" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
+                        <subviews/>
                     </view>
-                    <connections>
-                        <outlet property="btnDemo" destination="971" id="name-outlet-971"/>
-                    </connections>
+                    <connections/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="966" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -476,4 +467,7 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <resources>
+        <image name="bokeh.png" width="512" height="512"/>
+    </resources>
 </document>

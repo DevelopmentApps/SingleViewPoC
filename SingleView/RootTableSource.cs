@@ -14,7 +14,7 @@ namespace SingleView
 
     public class RootTableSource : UITableViewSource
     {
-        DirectionsController _directionsController;
+        PlaceDirectionsController _directionsController;
 
         Venue[] tableItems;
         UIViewController _parentController;
@@ -27,7 +27,7 @@ namespace SingleView
             tableItems = items;
             _parentController = parentController;
 
-            _directionsController = _parentController.Storyboard.InstantiateViewController("DirectionsController") as DirectionsController;
+            _directionsController = _parentController.Storyboard.InstantiateViewController("PlaceDirectionsController") as PlaceDirectionsController;
 
         }
 
@@ -125,6 +125,9 @@ namespace SingleView
             quickInfoAlertController.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Default, null));
             quickInfoAlertController.AddAction(UIAlertAction.Create("Get Directions", UIAlertActionStyle.Default, action =>
             {
+                _directionsController.Latitude = tableItems[indexPath.Row].location.lat;
+                _directionsController.Longitude = tableItems[indexPath.Row].location.lng;
+
                 _parentController.NavigationController.PushViewController(_directionsController, true);
 
             }));

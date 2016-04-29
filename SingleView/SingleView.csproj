@@ -117,9 +117,27 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Resources\Base.lproj\DirectionsController.cs" />
-    <Compile Include="Resources\Base.lproj\DirectionsController.designer.cs">
-      <DependentUpon>DirectionsController.cs</DependentUpon>
+    <Compile Include="DirectionsDto\Bounds.cs" />
+    <Compile Include="DirectionsDto\DirectionsRootObject.cs" />
+    <Compile Include="DirectionsDto\Distance.cs" />
+    <Compile Include="DirectionsDto\Distance2.cs" />
+    <Compile Include="DirectionsDto\Duration.cs" />
+    <Compile Include="DirectionsDto\Duration2.cs" />
+    <Compile Include="DirectionsDto\EndLocation.cs" />
+    <Compile Include="DirectionsDto\EndLocation2.cs" />
+    <Compile Include="DirectionsDto\Leg.cs" />
+    <Compile Include="DirectionsDto\Northeast.cs" />
+    <Compile Include="DirectionsDto\OverviewPolyline.cs" />
+    <Compile Include="DirectionsDto\Polyline.cs" />
+    <Compile Include="DirectionsDto\Route.cs" />
+    <Compile Include="DirectionsDto\Southwest.cs" />
+    <Compile Include="DirectionsDto\StartLocation.cs" />
+    <Compile Include="DirectionsDto\StartLocation2.cs" />
+    <Compile Include="DirectionsDto\Step.cs" />
+    <Compile Include="MapViewDirectionsDelegate.cs" />
+    <Compile Include="PlaceDirectionsController.cs" />
+    <Compile Include="PlaceDirectionsController.designer.cs">
+      <DependentUpon>PlaceDirectionsController.cs</DependentUpon>
     </Compile>
     <Compile Include="Resources\Base.lproj\FoursquareVenueController.cs" />
     <Compile Include="Resources\Base.lproj\FoursquareVenueController.designer.cs">
@@ -199,6 +217,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="bokeh.png" />
     <Content Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>

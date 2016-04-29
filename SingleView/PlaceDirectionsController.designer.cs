@@ -11,19 +11,11 @@ using UIKit;
 
 namespace SingleView
 {
-	[Register ("DirectionsController")]
-	partial class DirectionsController
+	[Register ("PlaceDirectionsController")]
+	partial class PlaceDirectionsController
 	{
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UIButton btnDemo { get; set; }
-
 		void ReleaseDesignerOutlets ()
 		{
-			if (btnDemo != null) {
-				btnDemo.Dispose ();
-				btnDemo = null;
-			}
 		}
 	}
 }
