@@ -29,7 +29,7 @@ namespace SingleView
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
-
+          
             MapServices.ProvideAPIKey(MapsApiKey);
           
             return true;
@@ -67,5 +67,7 @@ namespace SingleView
         }
 
        
+
+
     }
 }

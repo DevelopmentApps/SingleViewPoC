@@ -1,6 +1,7 @@
 ﻿using System;
 using Foundation;
 using UIKit;
+using CoreLocation;
 
 namespace SingleView
 {
@@ -11,12 +12,26 @@ namespace SingleView
 
         private GogAdsController _adsController;
 
-       
+        private CLLocationManager _location;
 
         private FoursquareVenueController _foursquareVenueController;
 
         public ViewController(IntPtr handle) : base(handle)
         {
+            _location = new CLLocationManager();
+            _location.RequestWhenInUseAuthorization();
+
+            if (NSUserDefaults.StandardUserDefaults.ValueForKey((Foundation.NSString)"firstLaunchDate") == null)
+                {
+                    NSUserDefaults.StandardUserDefaults.SetValueForKey(NSDate.Now, (Foundation.NSString)"firstLaunchDate");
+
+                var firstRunAlertController = UIAlertController.Create("First Run Message", "This is a demo of first message", UIAlertControllerStyle.Alert);
+
+                firstRunAlertController.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Default, null));
+
+                PresentViewController(firstRunAlertController, true, null);
+            }
+                
 
             if (NSLocale.PreferredLanguages.Length > 0)
             {

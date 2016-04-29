@@ -39,20 +39,7 @@ namespace SingleView
             PrepareDirectionsRestQuery();
         }
 
-        //public override void DidTapAtCoordinate(MapView mapView, CLLocationCoordinate2D coordinate)
-        //{
-
-        //    //Create/Add Marker 
-        //    var marker = new Marker { Position = coordinate, Map = mapView };
-        //    Locations.Add(coordinate);
-
-        //    if (Locations.Count > 1)
-        //    {
-        //        SetDirectionsQuery();
-        //    }
-        //}
-
-
+       
         private void PrepareDirectionsRestQuery()
         {
            
