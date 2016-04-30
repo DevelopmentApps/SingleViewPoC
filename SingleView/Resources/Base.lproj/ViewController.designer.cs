@@ -26,8 +26,6 @@ namespace SingleView
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton btnFoursquare { get; set; }
 
-		
-
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton btnTransition { get; set; }
@@ -50,7 +48,6 @@ namespace SingleView
 				btnFoursquare.Dispose ();
 				btnFoursquare = null;
 			}
-			
 			if (btnTransition != null) {
 				btnTransition.Dispose ();
 				btnTransition = null;
