@@ -25,6 +25,8 @@ namespace SingleView
                 {
                     NSUserDefaults.StandardUserDefaults.SetValueForKey(NSDate.Now, (Foundation.NSString)"firstLaunchDate");
 
+               
+
                 var firstRunAlertController = UIAlertController.Create("First Run Message", NSBundle.MainBundle.LocalizedString("QuickInfo", "This is for firs run message"), UIAlertControllerStyle.Alert);
 
                 firstRunAlertController.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Default, null));
