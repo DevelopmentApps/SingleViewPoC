@@ -134,6 +134,10 @@
     <Compile Include="DirectionsDto\StartLocation.cs" />
     <Compile Include="DirectionsDto\StartLocation2.cs" />
     <Compile Include="DirectionsDto\Step.cs" />
+    <Compile Include="DownMenuController.cs" />
+    <Compile Include="DownMenuController.designer.cs">
+      <DependentUpon>DownMenuController.cs</DependentUpon>
+    </Compile>
     <Compile Include="MapViewDirectionsDelegate.cs" />
     <Compile Include="PlaceDirectionsController.cs" />
     <Compile Include="PlaceDirectionsController.designer.cs">
