@@ -16,6 +16,8 @@ namespace SingleView
 
         private FoursquareVenueController _foursquareVenueController;
 
+        private TabBarControllerDemo _tabBarControllerDemo;
+
         public ViewController(IntPtr handle) : base(handle)
         {
             _location = new CLLocationManager();
@@ -48,8 +50,8 @@ namespace SingleView
            
 
             _foursquareVenueController = Storyboard.InstantiateViewController("FoursquareVenueController") as FoursquareVenueController;
-         
 
+            _tabBarControllerDemo = Storyboard.InstantiateViewController("TabBarControllerDemo") as TabBarControllerDemo;
         }
 
         public override void ViewDidLoad()
@@ -71,9 +73,10 @@ namespace SingleView
 
             btnFoursquare.TouchUpInside += BtnFoursquare_TouchUpInside;
 
+            btnTabBar.TouchUpInside += BtnTabBar_TouchUpInside;
+        }
 
-        }       
-
+        
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
@@ -171,6 +174,12 @@ namespace SingleView
         {
             NavigationController.PushViewController(_foursquareVenueController, true);
         }
+
+        private void BtnTabBar_TouchUpInside(object sender, EventArgs e)
+        {
+            NavigationController.PushViewController(_tabBarControllerDemo, true);
+        }
+
 
         private void OkButtonAction(UIAlertAction obj)
         {

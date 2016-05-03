@@ -43,7 +43,7 @@ namespace SingleView
         private void ShowBannerIntoView()
         {
 
-            _adView = new BannerView(size: AdSizeCons.SmartBannerPortrait, origin: new CGPoint(0, _window.Bounds.Bottom - 50))
+            _adView = new BannerView(size: AdSizeCons.SmartBannerPortrait, origin: new CGPoint(0, _window.Bounds.Bottom - 100))
             {
                 AdUnitID = _bannerId,
                 RootViewController = this

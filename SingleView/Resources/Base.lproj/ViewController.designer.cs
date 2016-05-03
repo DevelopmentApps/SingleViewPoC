@@ -28,6 +28,10 @@ namespace SingleView
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton btnTabBar { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton btnTransition { get; set; }
 
 		[Outlet]
@@ -47,6 +51,10 @@ namespace SingleView
 			if (btnFoursquare != null) {
 				btnFoursquare.Dispose ();
 				btnFoursquare = null;
+			}
+			if (btnTabBar != null) {
+				btnTabBar.Dispose ();
+				btnTabBar = null;
 			}
 			if (btnTransition != null) {
 				btnTransition.Dispose ();

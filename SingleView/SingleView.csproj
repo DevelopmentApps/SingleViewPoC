@@ -164,6 +164,10 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="RootTableSource.cs" />
     <Compile Include="SingleVenueInfo.cs" />
+    <Compile Include="TabBarControllerDemo.cs" />
+    <Compile Include="TabBarControllerDemo.designer.cs">
+      <DependentUpon>TabBarControllerDemo.cs</DependentUpon>
+    </Compile>
     <None Include="GettingStarted.Xamarin" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>
@@ -223,6 +227,20 @@
   <ItemGroup>
     <BundleResource Include="bokeh.png" />
     <Content Include="Entitlements.plist" />
+    <BundleResource Include="Resources\DailyBooth\camera_button_take.png" />
+    <BundleResource Include="Resources\DailyBooth\camera_button_take%402x.png" />
+    <BundleResource Include="Resources\DailyBooth\DailyBoothIcon.png" />
+    <BundleResource Include="Resources\DailyBooth\DailyBoothIcon%402x.png" />
+    <BundleResource Include="Resources\DailyBooth\tab_feed.png" />
+    <BundleResource Include="Resources\DailyBooth\tab_feed%402x.png" />
+    <BundleResource Include="Resources\DailyBooth\tab_feed_profile.png" />
+    <BundleResource Include="Resources\DailyBooth\tab_feed_profile%402x.png" />
+    <BundleResource Include="Resources\DailyBooth\tab_live.png" />
+    <BundleResource Include="Resources\DailyBooth\tab_live%402x.png" />
+    <BundleResource Include="Resources\DailyBooth\tab_messages.png" />
+    <BundleResource Include="Resources\DailyBooth\tab_messages%402x.png" />
+    <BundleResource Include="Resources\DailyBooth\tabBar_cameraButton_ready_matte.png" />
+    <BundleResource Include="Resources\DailyBooth\tabBar_cameraButton_ready_matte%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewControllers\" />

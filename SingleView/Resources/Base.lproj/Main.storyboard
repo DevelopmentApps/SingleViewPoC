@@ -49,6 +49,12 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1946" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="108" y="384" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -57,6 +63,8 @@
                         <outlet property="btnTransition" destination="138" id="name-outlet-138"/>
                         <outlet property="btnAd" destination="833" id="name-outlet-833"/>
                         <outlet property="btnFoursquare" destination="910" id="name-outlet-910"/>
+                        <segue id="1498" destination="1082" kind="presentation"/>
+                        <outlet property="btnTabBar" destination="1946" id="name-outlet-1946"/>
                     </connections>
                     <navigationItem id="101" key="navigationItem"/>
                 </viewController>
@@ -128,6 +136,7 @@
                         <outlet property="btnNewPage" destination="592" id="name-outlet-592"/>
                         <outlet property="lblMessageToUser" destination="599" id="name-outlet-599"/>
                         <outlet property="btnTransitionToAddress" destination="610" id="name-outlet-610"/>
+                        <segue id="1636" destination="1082" kind="presentation"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="470" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -136,7 +145,11 @@
         </scene>
         <scene sceneID="483">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="484" sceneMemberID="viewController" customClass="ListDemoController" storyboardIdentifier="ListDemoController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="484" sceneMemberID="viewController" customClass="ListDemoController" storyboardIdentifier="ListDemoController">
+                    <connections>
+                        <segue id="1730" destination="1082" kind="presentation"/>
+                    </connections>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="485" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="525" y="75"/>
@@ -305,6 +318,7 @@
                         <outlet property="lblError" destination="686" id="name-outlet-686"/>
                         <outlet property="lblNumCalls" destination="806" id="name-outlet-806"/>
                         <outlet property="lblErrorDomain" destination="817" id="name-outlet-817"/>
+                        <segue id="1832" destination="1082" kind="presentation"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="622" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -323,6 +337,9 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue id="1942" destination="1082" kind="presentation"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="830" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -470,8 +487,30 @@
             </objects>
             <point key="canvasLocation" x="5294" y="77"/>
         </scene>
+        <scene sceneID="1081">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="1082" sceneMemberID="viewController" customClass="TabBarControllerDemo" storyboardIdentifier="TabBarControllerDemo">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="1087">
+                        <rect key="frame" x="0.0" y="551" width="600" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections/>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1088" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="335" y="930"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bokeh.png" width="512" height="512"/>
+        <image name="DailyBooth/camera_button_take.png" width="67" height="66"/>
+        <image name="DailyBooth/DailyBoothIcon.png" width="57" height="57"/>
+        <image name="DailyBooth/tab_feed.png" width="32" height="32"/>
+        <image name="DailyBooth/tab_feed_profile.png" width="48" height="32"/>
+        <image name="DailyBooth/tab_live.png" width="48" height="32"/>
+        <image name="DailyBooth/tab_messages.png" width="48" height="32"/>
+        <image name="DailyBooth/tabBar_cameraButton_ready_matte.png" width="67" height="66"/>
     </resources>
 </document>
